@@ -8,7 +8,7 @@ const takeAttendance = async (id, pr) => {
   const student = await Student.findById(id);
   const presence = student.presence + pr;
   await Student.findByIdAndUpdate(
-    req.params.studentid,
+    id,
     { presence: presence },
     { new: true },
   );
