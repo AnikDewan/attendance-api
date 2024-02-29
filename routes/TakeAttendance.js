@@ -4,19 +4,23 @@ import fetchTeacher from "../middleware/FetchTeacher.js";
 
 const router = express.Router();
 
-router.put("/:studentid", fetchTeacher, async (req, res) => {
+const takeAttendance = async (id, pr) => {
+  const student = await Student.findById(id);
+  const presence = student.presence + pr;
+  await Student.findByIdAndUpdate(
+    req.params.studentid,
+    { presence: presence },
+    { new: true },
+  );
+};
+
+router.put("/", fetchTeacher, (req, res) => {
   try {
-    const students = await Student.findById(req.params.studentid);
-    if (!students) {
-      return res.status(404).json({ error: "Student not found" });
-    }
-    const presence = students.presence + req.body.presence;
-    const student = await Student.findByIdAndUpdate(
-      req.params.studentid,
-      { presence: presence },
-      { new: true },
-    );
-    res.json(student);
+    allId = Object.keys(req.body);
+    allId.forEach((id) => {
+      takeAttendance(id, req.body[id]);
+    });
+    res.json({ success: "Attendance submitted successfully" });
   } catch {
     res.status(500).json({ error: "Internal server error" });
   }
