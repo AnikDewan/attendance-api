@@ -5,7 +5,7 @@ import cors from "cors";
 import signUp from "./routes/SignUp.js";
 import signIn from "./routes/SignIn.js";
 import getTeacher from "./routes/GetTeacher.js";
-import addStudent from "./routes/AddStudents.js";
+import addStudent from "./routes/AddStudent.js";
 import getStudents from "./routes/GetStudents.js";
 import updateStudent from "./routes/UpdateStudent.js";
 import deleteStudent from "./routes/DeleteStudent.js";
