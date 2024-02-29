@@ -14,9 +14,9 @@ const takeAttendance = async (id, pr) => {
   );
 };
 
-router.put("/", fetchTeacher, (req, res) => {
+router.put("/", (req, res) => {
   try {
-    allId = Object.keys(req.body);
+    const allId = Object.keys(req.body);
     allId.forEach((id) => {
       takeAttendance(id, req.body[id]);
     });
