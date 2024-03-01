@@ -19,10 +19,10 @@ router.put("/:classid", fetchTeacher, async (req, res) => {
       update.name = req.body.name;
     }
     update.access = req.body.access ? "only me" : "all";
-    const CLASS = await Class.findByIdAndUpdate(req.params.classid, update, {
+    await Class.findByIdAndUpdate(req.params.classid, update, {
       new: true,
     });
-    res.json(CLASS);
+    res.json({ success: "Class updated successfully" });
   } catch {
     res.status(500).json({ error: "Internal server error" });
   }

@@ -21,12 +21,10 @@ router.put("/:studentid", fetchTeacher, async (req, res) => {
     if (req.body.roll) {
       update.roll = req.body.roll;
     }
-    const student = await Student.findByIdAndUpdate(
-      req.params.studentid,
-      update,
-      { new: true },
-    );
-    res.json(student);
+    await Student.findByIdAndUpdate(req.params.studentid, update, {
+      new: true,
+    });
+    res.json({ success: "Student updated successfully" });
   } catch {
     res.status(500).json({ error: "Internal server error" });
   }

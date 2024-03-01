@@ -15,7 +15,7 @@ router.delete("/:classid", fetchTeacher, async (req, res) => {
     return res.status(404).json({ error: "Invalid class id" });
   }
   try {
-    const CLASS = await Class.findByIdAndDelete(req.params.classid);
+    await Class.findByIdAndDelete(req.params.classid);
     const student = await Student.deleteMany({ sec: req.params.classid });
     if (student.deletedCount) {
       res.json({ success: "Class & Students Deleted" });

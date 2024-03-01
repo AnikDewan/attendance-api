@@ -10,15 +10,15 @@ router.delete("/:studentid", fetchTeacher, async (req, res) => {
     if (!students) {
       return res.status(404).json({ error: "Student not found" });
     }
-		} catch {
+  } catch {
     return res.status(404).json({ error: "Invalid class id" });
   }
   try {
-    const student = await Student.findByIdAndDelete(req.params.studentid);
-    res.json({success : "Student deleted"});
+    await Student.findByIdAndDelete(req.params.studentid);
+    res.json({ success: "Student deleted" });
   } catch {
     res.status(500).json({ error: "Internal server error" });
   }
-});;
+});
 
 export default router;
